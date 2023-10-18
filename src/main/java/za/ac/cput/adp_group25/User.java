@@ -14,6 +14,7 @@ public class User implements Serializable
         private boolean isAdmin;
         private String Function;
     
+    //Basic Constructor for Login    
     public User(int ID, String password, String function)
     {
         this.ID = ID;
@@ -21,6 +22,7 @@ public class User implements Serializable
         this.Function = function;
     }
     
+    //Full Length Constructor
     public User(int ID, String pass, String name, String surname, boolean isAdmin)
     {
         this.ID = ID;
@@ -30,6 +32,7 @@ public class User implements Serializable
         this.isAdmin = isAdmin;
     }
     
+    //Full Length Constructor + Function (Differentiates the Server side processing.)
     public User(int ID, String pass, String name, String surname, boolean isAdmin, String function)
     {
         this.ID = ID;

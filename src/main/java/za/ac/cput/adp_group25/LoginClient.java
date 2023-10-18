@@ -85,7 +85,8 @@ public class LoginClient implements ActionListener{
 //            catch(IOException e){
 //                System.out.println("Exception error in LoginClient() method: "+e.getMessage());
 //            }            
-            createAndShowStudentPageGUI();               
+//            createLoginGUI();
+              
 
     }
       
@@ -111,7 +112,6 @@ public class LoginClient implements ActionListener{
             pnlBtn.setLayout(new GridLayout(1, 3));
                 pnlBtn.add(btnLogin);
                 pnlBtn.add(btnExit);
-                pnlBtn.add(btnSignUp);
             
             frmFrame.add(pnlMain, BorderLayout.CENTER);    
             frmFrame.add(pnlBtn, BorderLayout.SOUTH);    
@@ -232,7 +232,7 @@ public class LoginClient implements ActionListener{
          
          private void AddCourse() {
            try{
-               String strCourseID =txtNewSubjCode.getText();
+               int strCourseID =Integer.parseInt(txtNewSubjCode.getText());
     String strCourseTitle=txtNewSubjName.getText();
     String strCourseFaculty= txtNewSubjFac.getText() ;
     String strFunction= "Add New Course";
@@ -397,14 +397,15 @@ Course newCourse = new Course(strCourseID, strCourseTitle,strCourseFaculty,strFu
             AttemptLogin();
         } else if (e.getSource()==btnExit){
            closeConnection();
+           System.exit(0);
         }else if (e.getSource()==btnSignUp){
             // where do you go for the sign up page
         } else if (e.getSource()==btnAllCourses){
-            AllCourses();
+//            AllCourses();
            btnUnenroll.setVisible(false);
              btnEnroll.setVisible(true);
        } else if (e.getSource()==btnEnrolledCourses){
-           EnrolledCourses();
+//           EnrolledCourses();
            btnUnenroll.setVisible(true);
            btnEnroll.setVisible(false);
            } else if (e.getSource()==btnUnenroll){
@@ -414,7 +415,7 @@ Course newCourse = new Course(strCourseID, strCourseTitle,strCourseFaculty,strFu
            } else if (e.getSource()==btnAddNewStud){
            AddStudent();
            } else if (e.getSource()==btnDisplayStud){
-           AllStudents();
+//           AllStudents();
            } else if (e.getSource()==btnAddNewSubj){
            AddCourse();
            } 
@@ -442,12 +443,12 @@ Course newCourse = new Course(strCourseID, strCourseTitle,strCourseFaculty,strFu
         
         
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-       
-        LoginClient client=new LoginClient();
-    }
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String[] args) {
+//       
+//        LoginClient client=new LoginClient();
+//    }
     
 }
