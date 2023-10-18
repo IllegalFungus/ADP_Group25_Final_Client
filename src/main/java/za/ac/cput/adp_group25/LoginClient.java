@@ -1,6 +1,7 @@
 /*
-Coded By: Siddeeq Rabin 221084096
-*/
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
 package za.ac.cput.adp_group25;
 
 import javax.swing.*;
@@ -12,12 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+/**
+ *
+ * @author Rabin Family
+ */
 public class LoginClient implements ActionListener{
     
     private static ObjectInputStream in;
     private static ObjectOutputStream out;
-    private static JFrame frameAdminLogin=new JFrame(),frameStudentLoggedInPage=new JFrame(),frameAdminLoggedInPage=new JFrame(), frameStudentLogin=new JFrame();
+    private static JFrame frameAdminLogin=new JFrame(),frameStudentLoggedInPage=new JFrame(),frameAdminLoggedInPage=new JFrame(),
+            frameStudentLogin=new JFrame();
     private static JPanel northPanel=new JPanel(),southPanel=new JPanel();
     private static JPanel n2nPanel=new JPanel(),n2sPanel=new JPanel();
     private static JPanel n3nPanel=new JPanel(),n3sPanel=new JPanel();
@@ -30,21 +35,24 @@ public class LoginClient implements ActionListener{
             lblStudSurname=new JLabel("Student Surname :"), lblNewStudPassw=new JLabel("Password: "),
             lblNewStudSubj=new JLabel("Subject: "),
             lblNewSubject=new JLabel("Add New Subject "), lblSubjName=new JLabel("Subject: "),
-             lblSubjCode=new JLabel("Subject Code: "), lblNewID=new JLabel("ID: "),
-             lblSubjFac=new JLabel("Subject Faculty: ");
+             lblSubjCode=new JLabel("Subject Code: "), lblNewID=new JLabel("User ID: "),
+             lblSubjFac=new JLabel("Subject Faculty: "),lblSpace=new JLabel(" "),
+                     lblNewID2=new JLabel("ID: "),lblSubjCode2=new JLabel("Subject Code: ");
     private static JTextField txtStudentNum=new JTextField(20),txtPassword=new JTextField(20),
             txtNameSurname=new JTextField(20), txtAdminNum=new JTextField(20),
             txtEmail=new JTextField(20), txtMobNum=new JTextField(20),
             txtConPass=new JTextField(20),txtCourseID=new JTextField(20),  txtNewStudSurname=new JTextField(20),
               txtNewStudName=new JTextField(20),txtNewStudPassw=new JTextField(20),txtNewStudSubj=new JTextField(20),
             txtNewSubjName=new JTextField(20),txtNewSubjCode=new JTextField(20), txtNewID=new JTextField(20),
-             txtNewSubjFac=new JTextField(20);
+             txtNewSubjFac=new JTextField(20),txtDeleteOrGetID=new JTextField(20),txtDeleteOrGetCourse=new JTextField(20);
     private static JTextArea txtAreaRecords=new JTextArea(10,50);
     private static JButton btnLogin=new JButton("Login"),btnStudentSignUp1=new JButton("Sign Up"),btnExit=new JButton("Exit"),
             btnStudentSignUp2=new JButton("Sign Up"),btnAdminSignUp1=new JButton("Sign Up"),btnAllCourses=new JButton("All Courses"),
             btnEnrolledCourses=new JButton("Enrolled Courses"),btnEnroll=new JButton("Enroll"),
             btnUnenroll=new JButton("Unenroll"), btnAddNewStud=new JButton("Add New Student"),
-            btnAddNewSubj=new JButton("Add New Subject"), btnDisplayStud=new JButton("Display Students");
+            btnAddNewSubj=new JButton("Add New Subject"), btnDisplayStud=new JButton("Display Students"),
+            btnDeleteUser=new JButton("Delete User"), btnGetUser=new JButton("Get User"), btnGetCourse=new JButton("Get Course"),
+             btnDeleteCourse=new JButton("Delete Course");
     private static String[] Subject = { "Business & Management Studies", "Economics & Econometrics","Medicine","Law",
             "Accounting & Finance","Art & Design"," Engineering & Technology" };
     private static String[] User = { "Student", "Admin" };
@@ -68,7 +76,7 @@ public class LoginClient implements ActionListener{
       private static   JLabel lblPass = new JLabel("Password:");
   private static  JPanel pnlMain = new JPanel();
  
-    
+//-----------------------------------------------------------------------------------------------------------------------------------------------     
       public LoginClient(){
            
 //            try{
@@ -85,11 +93,10 @@ public class LoginClient implements ActionListener{
 //            catch(IOException e){
 //                System.out.println("Exception error in LoginClient() method: "+e.getMessage());
 //            }            
-//            createLoginGUI();
-              
+            createLoginGUI();               
 
     }
-      
+//----------------------------------------------------------------------------------------------------------------------------------------------- 
       
         public void createLoginGUI()
         {
@@ -100,7 +107,7 @@ public class LoginClient implements ActionListener{
             
                 btnExit.addActionListener(this);
         
-                btnSignUp.addActionListener(this);
+               
                 
       
             pnlMain.setLayout(new GridLayout(2, 2));
@@ -109,9 +116,10 @@ public class LoginClient implements ActionListener{
                 pnlMain.add(lblPass);
                 pnlMain.add(txtPass);
         
-            pnlBtn.setLayout(new GridLayout(1, 3));
+            pnlBtn.setLayout(new GridLayout(1, 2));
                 pnlBtn.add(btnLogin);
                 pnlBtn.add(btnExit);
+                
             
             frmFrame.add(pnlMain, BorderLayout.CENTER);    
             frmFrame.add(pnlBtn, BorderLayout.SOUTH);    
@@ -121,10 +129,8 @@ public class LoginClient implements ActionListener{
             frmFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             
         }
-      
-   
-       
-      
+//----------------------------------------------------------------------------------------------------------------------------------------------- 
+        
        public void createAndShowStudentPageGUI(){
           
             frmFrame.setLayout(new BorderLayout());  
@@ -157,6 +163,7 @@ public class LoginClient implements ActionListener{
 
         
        }
+//----------------------------------------------------------------------------------------------------------------------------------------------- 
        
         private void createAndShowAdminPageGUI(){
             
@@ -165,21 +172,32 @@ public class LoginClient implements ActionListener{
                
                pnl1.add(txtAreaRecords);
                
-                pnl2.setLayout(new GridLayout(6,5));
+                pnl2.setLayout(new GridLayout(8,5));
                 pnl2.add(lblStudName);
                 pnl2.add(txtNewStudName);
                 pnl2.add(lblStudSurname);
                 pnl2.add(txtNewStudSurname);
                 pnl2.add(lblNewStudPassw);
                 pnl2.add(txtNewStudPassw);
-                pnl2.add(lblNewID);
+                pnl2.add(lblNewID2);
                 pnl2.add(txtNewID);
                 pnl2.add(lblNewStudSubj);
-                pnl2.add(txtNewStudSubj);
-               pnl2.add(btnAddNewStud); 
+               pnl2.add(txtNewStudSubj);
+               pnl2.add(btnAddNewStud);
+            
      
-               pnl3.setLayout(new GridLayout(4,2));
+               pnl3.setLayout(new GridLayout(8,2));
                
+              pnl3.add(lblNewID);
+              pnl3.add(txtDeleteOrGetID);
+              pnl3.add(btnDeleteUser);
+             pnl3.add(btnGetUser);
+             
+             pnl3.add(lblSubjCode2);
+             pnl3.add(txtDeleteOrGetCourse);
+             pnl3.add(btnDeleteCourse);
+            pnl3.add(btnGetCourse);
+             
                 pnl3.add(lblSubjFac);
                pnl3.add(txtNewSubjFac); 
                  pnl3.add(lblSubjName);
@@ -188,56 +206,126 @@ public class LoginClient implements ActionListener{
                pnl3.add(txtNewSubjCode); 
                pnl3.add(btnAddNewSubj);
                 pnl3.add(btnDisplayStud);
-               
+               //
                
                frmFrame.add(pnl2, BorderLayout.NORTH);
                frmFrame.add(pnl3, BorderLayout.CENTER);
                frmFrame.add(pnl1, BorderLayout.SOUTH); 
                
-             frmFrame.setSize(700,500);
+             frmFrame.setSize(800,600);
             frmFrame.setVisible(true);
             frmFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
             
             btnAddNewStud.addActionListener(this);
             btnDisplayStud.addActionListener(this);
             btnAddNewSubj.addActionListener(this);
-            
+            btnDeleteUser.addActionListener(this);
+            btnDeleteCourse.addActionListener(this);
+            btnGetCourse.addActionListener(this);
+            btnGetUser.addActionListener(this);
                
         }
+//----------------------------------------------------------------------------------------------------------------------------------------------- 
         
-         private void Enrolling(){
-        try{
-            String strFunction = "Enroll Course for student"; 
-            String strID = txtID.getText();
-            String strCourse=txtAreaRecords.getSelectedText();
-     
-     
-      int intID = Integer.parseInt(strID);
-           
-            
-            User courseEnroll = new User(intID, strFunction ,strCourse);
-            
-            
-            object=courseEnroll;
-            out.writeObject(object);
-            out.flush();
+         private void DeleteUser() {
+            try {
+                int intID = Integer.parseInt(txtDeleteOrGetID.getText());
+                String strFunction = "Delete";
+                
+                User user = new User(intID, null, strFunction);
+                
+                out.writeObject(user);
+                out.flush();
+            } catch (IOException e) {
+                System.out.println("Exception error: "+e.getMessage());
+            }
         }
-        catch(IOException e){
-            System.out.println("Exception error in Enrolling() method: "+e.getMessage());
-        }
-   
-        }
-        
-   
+//----------------------------------------------------------------------------------------------------------------------------------------------- 
          
+          private void DeleteCourse() {
+            try {
+                int intID = Integer.parseInt(txtDeleteOrGetCourse.getText());
+                String strFunction = "deleteCourse";
+                
+                Course course = new Course(intID, null, null, strFunction);
+                
+                out.writeObject(course);
+                out.flush();
+            } catch (IOException e) {
+                System.out.println("Exception error: "+e.getMessage());
+            }
+        }
+//----------------------------------------------------------------------------------------------------------------------------------------------- 
+          
+           private void GetUserRequest() {
+            try {
+                int intID = Integer.parseInt(txtDeleteOrGetID.getText());
+                String strFunction = "getUser";
+                
+                User user = new User(intID, null, strFunction);
+                
+                out.writeObject(user);
+                out.flush();
+            } catch (IOException e) {
+                System.out.println("Exception error: "+e.getMessage());
+            }
+        }
+           private User userReceived;
+        private  User GetUserReceive() {
+            
+            try
+            {
+                object = in.readObject();
+                userReceived = (User) object;
+            } catch (ClassNotFoundException cnfe)
+            {
+                System.out.println("cnf error: "+cnfe.getMessage());
+            } catch (IOException e)
+            {
+                System.out.println("Exception error: "+e.getMessage());
+            }
+            return userReceived;
+        }
+//-----------------------------------------------------------------------------------------------------------------------------------------------
+        
+           private void GetCourseRequest() {
+            try {
+                int intID = Integer.parseInt(txtDeleteOrGetCourse.getText());
+                String strFunction = "getCourse";
+                Course course = new Course(intID, null, null, strFunction);
+                
+                out.writeObject(course);
+                out.flush();
+            } catch (IOException e) {
+                System.out.println("Exception error: "+e.getMessage());
+            }
+        }
+            private Course courseReceived;
+        private Course GetCourseReceive() {
+            try
+            {
+                object = in.readObject();
+                courseReceived = (Course) object;
+            } catch (ClassNotFoundException cnfe)
+            {
+                System.out.println("cnf error: "+cnfe.getMessage());
+            } catch (IOException e)
+            {
+                System.out.println("Exception error: "+e.getMessage());
+            }
+            return courseReceived;
+        }
+//----------------------------------------------------------------------------------------------------------------------------------------------- 
+        
          private void AddCourse() {
            try{
-               int strCourseID =Integer.parseInt(txtNewSubjCode.getText());
+               
+    int intCourseID = Integer.parseInt(txtNewSubjCode.getText());
     String strCourseTitle=txtNewSubjName.getText();
     String strCourseFaculty= txtNewSubjFac.getText() ;
     String strFunction= "Add New Course";
     
-Course newCourse = new Course(strCourseID, strCourseTitle,strCourseFaculty,strFunction );
+Course newCourse = new Course(intCourseID, strCourseTitle,strCourseFaculty,strFunction );
    object=newCourse;
             out.writeObject(object);
             out.flush();
@@ -248,31 +336,36 @@ Course newCourse = new Course(strCourseID, strCourseTitle,strCourseFaculty,strFu
 
               
          }
+//----------------------------------------------------------------------------------------------------------------------------------------------- 
          
      private void AddStudent() {
+
+        
         try{
              String strID = txtID.getText();
      String strPassword = txtPass.getText();
       int intID = Integer.parseInt(strID);
-      String strFunction = "Add Student";
+      String strFunction = "addUser";
       String strName= txtNewStudName.getText();
        String strSurname= txtNewStudSurname.getText();
        String strSubject= txtNewStudSubj.getText();
        boolean isAdmin = AdminChb.isSelected();
+      
        
-            User stud = new User(intID, strName, strSurname, strPassword, isAdmin, "addUser" );
+            User stud = new User(intID, strName,strSurname,strPassword,isAdmin,strSubject );
              
             object=stud;
             out.writeObject(object);
             out.flush();
         }
         catch(IOException e){
-            System.out.println("Exception error in addStudent() method: "+e.getMessage());
+            System.out.println("Exception error in AddStudent() method: "+e.getMessage());
         }
         
     }
         
-   
+//----------------------------------------------------------------------------------------------------------------------------------------------- 
+     
        private static void AttemptLogin(){
      String strID = txtID.getText();
      String strPassword = txtPass.getText();
@@ -292,25 +385,6 @@ Course newCourse = new Course(strCourseID, strCourseTitle,strCourseFaculty,strFu
                 System.out.println("IOException in client send object: " + ioe.getMessage());
             }
         }
-       
-        private void Unenrolling(){
-        String strFunction = "Unenroll"; 
-            String strID = txtID.getText();
-            String strCourse=txtAreaRecords.getSelectedText(); 
-            int intID = Integer.parseInt(strID);
-            
-            User UnenrollCourse = new User(intID, strCourse, strFunction);
-            
-              try
-            {
-                out.writeObject(UnenrollCourse);
-                out.flush();
-            } catch (IOException ioe)
-            {
-                System.out.println("IOException in client send object: " + ioe.getMessage());
-            }
-     }
-       
         public void LoggedIn(){
                 try
                 {
@@ -339,31 +413,126 @@ Course newCourse = new Course(strCourseID, strCourseTitle,strCourseFaculty,strFu
                 }
 
     }
-      
-    
+//----------------------------------------------------------------------------------------------------------------------------------------------- 
         
-    
-      private void AllCourses(ArrayList courseList) throws IOException, ClassNotFoundException{
-          for(int i =0;i<courseList.size();i++){
-            txtAreaRecords.append(courseList.get(i).toString()+"\n");            
-        }
-        txtAreaRecords.append("------------------------------------------"+"\n");
+           private void Enrolling(){
+        try{
+            String strFunction = "Enroll Course for student"; 
+            String strUserID = txtID.getText();
+            String strCourseID=txtAreaRecords.getSelectedText();
+     //int intCOurseID = Integer.parseInt(txtAreaRecords.getSelectedText()); 
+     
+      int intUserID = Integer.parseInt(strUserID);
+           
+
+            User Enroll = new User(intUserID, strFunction,strCourseID);
             
-      }
-      private void AllStudents(ArrayList studentList) throws IOException, ClassNotFoundException{
-          for(int i =0;i<studentList.size();i++){
-            txtAreaRecords.append(studentList.get(i).toString()+"\n");            
-        }
-        txtAreaRecords.append("------------------------------------------"+"\n");
             
-      }
-      
-      private void EnrolledCourses(ArrayList enrolledCourseList) throws IOException, ClassNotFoundException{
-           for(int i =0;i<enrolledCourseList.size();i++){
-            txtAreaRecords.append(enrolledCourseList.get(i).toString()+"\n");            
+            
+            out.writeObject(Enroll);
+            out.flush();
         }
-        txtAreaRecords.append("------------------------------------------"+"\n");
+        catch(IOException e){
+            System.out.println("Exception error in Enrolling() method: "+e.getMessage());
+        }
+        
+        
+    }
+//----------------------------------------------------------------------------------------------------------------------------------------------- 
+           
+        private void Unenrolling(){
+        String strFunction = "Unenroll"; 
+            String strUserID = txtID.getText();
+            String strCourseID=txtAreaRecords.getSelectedText(); 
+            int intUserID = Integer.parseInt(strUserID);
+            
+            User Unenroll = new User(intUserID, strCourseID, strFunction);
+            
+              try
+            {
+                out.writeObject(Unenroll);
+                out.flush();
+            } catch (IOException ioe)
+            {
+                System.out.println("IOException in client send object: " + ioe.getMessage());
+            }
+     }
+//----------------------------------------------------------------------------------------------------------------------------------------------- 
+        
+     private void GetAllCoursesRequest() {
+            try {
+                out.writeObject("allCourses");
+                out.flush();
+            } catch (IOException e) {
+                System.out.println("Exception error: "+e.getMessage());
+            }
+        }
+     
+       private ArrayList listReceived;
+        private ArrayList<Course> GetAllCoursesReceived() {
+            try {
+                object = in.readObject();
+                listReceived = (ArrayList<Course>)object;
+            } catch(IOException e) {
+                System.out.println("Exception error: "+e.getMessage());
+            } catch (ClassNotFoundException cnfe) {
+                System.out.println("CNFE error: "+ cnfe.getMessage());
+            }
+            return listReceived;
+        }
+        
+//-----------------------------------------------------------------------------------------------------------------------------------------------   
+        
+        
+      private void GetAllUsersRequest() {
+            try {
+                out.writeObject("allUsers");
+                out.flush();
+            } catch (IOException e) {
+                System.out.println("Exception error: "+e.getMessage());
+            }
+        }
+        
+        private ArrayList<User> GetAllUsersReceived() {
+            try {
+                object = in.readObject();
+                listReceived = (ArrayList<User>)object;
+            } catch(IOException e) {
+                System.out.println("Exception error: "+e.getMessage());
+            } catch (ClassNotFoundException cnfe) {
+                System.out.println("CNFE error: "+ cnfe.getMessage());
+            }
+            return listReceived;
+        }
+        
+//----------------------------------------------------------------------------------------------------------------------------------------------- 
+        
+        
+      private void GetAllEnrolledCoursesRequest(){
+          try {
+               int intID = Integer.parseInt(txtID.getText());
+                String strFunction = "getEnrolledCourses";
+                
+                User EnrolledCourses = new User(intID, null, strFunction);
+              
+                out.writeObject(EnrolledCourses);
+                out.flush();
+            } catch (IOException e) {
+                System.out.println("Exception error: "+e.getMessage());
+            }
       }
+       private ArrayList<Course> GetAllEnrolledCoursesReceived() {
+            try {
+                object = in.readObject();
+                listReceived = (ArrayList<Course>)object;
+            } catch(IOException e) {
+                System.out.println("Exception error: "+e.getMessage());
+            } catch (ClassNotFoundException cnfe) {
+                System.out.println("CNFE error: "+ cnfe.getMessage());
+            }
+            return listReceived;
+        }
+//-----------------------------------------------------------------------------------------------------------------------------------------------        
     
        private static void closeConnection() 
         {
@@ -390,24 +559,26 @@ Course newCourse = new Course(strCourseID, strCourseTitle,strCourseFaculty,strFu
                 System.out.println("IO Exception in closeConnections(): " + ioe.getMessage());
             }
         }
-   
+//----------------------------------------------------------------------------------------------------------------------------------------------- 
+       
       @Override
     public void actionPerformed(ActionEvent e) {  
        if(e.getSource()==btnLogin){            
             AttemptLogin();
+             LoggedIn();
         } else if (e.getSource()==btnExit){
            closeConnection();
            System.exit(0);
-        }else if (e.getSource()==btnSignUp){
-            // where do you go for the sign up page
         } else if (e.getSource()==btnAllCourses){
-//            AllCourses();
-           btnUnenroll.setVisible(false);
-             btnEnroll.setVisible(true);
+          GetAllCoursesRequest();
+            GetAllCoursesReceived();
+            btnUnenroll.setVisible(false);
+            btnEnroll.setVisible(true);
        } else if (e.getSource()==btnEnrolledCourses){
-//           EnrolledCourses();
+           GetAllEnrolledCoursesRequest();
+           GetAllEnrolledCoursesReceived();
            btnUnenroll.setVisible(true);
-           btnEnroll.setVisible(false);
+             btnEnroll.setVisible(false);
            } else if (e.getSource()==btnUnenroll){
            Unenrolling();
            } else if (e.getSource()==btnEnroll){
@@ -415,13 +586,29 @@ Course newCourse = new Course(strCourseID, strCourseTitle,strCourseFaculty,strFu
            } else if (e.getSource()==btnAddNewStud){
            AddStudent();
            } else if (e.getSource()==btnDisplayStud){
-//           AllStudents();
+           GetAllUsersRequest();
+            GetUserReceive();
            } else if (e.getSource()==btnAddNewSubj){
            AddCourse();
            } 
-    }   
+       else if (e.getSource()==btnDeleteUser){
+           DeleteUser();
+       }else if (e.getSource()==btnDeleteCourse){
+           DeleteCourse();
+       }else if (e.getSource()==btnGetCourse){
+           GetCourseRequest();
+           GetCourseReceive();
+           }else if (e.getSource()==btnGetUser){
+           GetUserRequest();
+           GetUserReceive();
+           }
+           
+          
+          
+    
+    }
         
-        
+//-----------------------------------------------------------------------------------------------------------------------------------------------         
         
         
         
@@ -443,12 +630,12 @@ Course newCourse = new Course(strCourseID, strCourseTitle,strCourseFaculty,strFu
         
         
 
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String[] args) {
-//       
-//        LoginClient client=new LoginClient();
-//    }
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+       
+        LoginClient client=new LoginClient();
+    }
     
 }
